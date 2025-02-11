@@ -19,7 +19,7 @@ OVERVIEW:
 Sensor data format:
 The sensor program simulates sending temperature sensor data as a string with a delimiter to separate the timestamp, time since sensor started and the sensor temperature reading accurate to two decimal places.  The server receives and displays this data.  The simplified format was used given the nature of the setup and can be expanded to use other formats such as JSON or protobuf to standardize receiving data from various sensors with multiple parameters.  
 
-We did not attempt to include sensor identification information which would be useful in case of multiple sensor.  Also using a pub-sub approach would allow for easier scalability without introducing much complexity into the program.
+I did not attempt to include sensor identification information which would be useful in case of multiple sensors.  Also using a pub-sub approach would allow for easier scalability without introducing much complexity into the program.
 
 
 Sensor config format:
