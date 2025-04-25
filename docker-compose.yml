@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  server:
+    container_name: zmq_server
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    ports:
+      - "5555:5555/tcp"
+
+    networks:
+      - app-network
+
+  client:
+    container_name: zmq_client
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    ports:
+      - "5556:5556/tcp"
+
+    networks:
+      - app-network
+    depends_on:
+      - server
+
+networks:
+  app-network:
+    driver: bridge
