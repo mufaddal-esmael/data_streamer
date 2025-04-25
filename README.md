@@ -16,7 +16,7 @@ The python server can be run in a separate terminal using: python server.py
 
 OVERVIEW:
 
-Sensor data format:
+Sensor data format: 
 The sensor program simulates sending temperature sensor data as a string with a delimiter to separate the timestamp, time since sensor started and the sensor temperature reading accurate to two decimal places.  The server receives and displays this data.  The simplified format was used given the nature of the setup and can be expanded to use other formats such as JSON or protobuf to standardize receiving data from various sensors with multiple parameters.  
 
 I did not attempt to include sensor identification information which would be useful in case of multiple sensors.  Also using a pub-sub approach would allow for easier scalability without introducing much complexity into the program.
@@ -59,4 +59,4 @@ TESTING AND ADDITIONAL SUGGESTIONS:
 
 The program is tested including accounting for invalid data and inputs.  More time could be spent to test the config parameters at the input as well to ensure the data is valid.  The data frequency was limited to between 1 and 10 seconds but can be easily expanded with appropriate testing.  Data buffering and clearing would be another thing to take into account when scaling this system.  More care would also be applicable in protecting shared variables between the threads.  
 
-The first portion which required sending temperature sensor data was fairly straightforward and was completed shortly.  The second portion which entailed sending config parameters asynchronously required a redesign of both the client and server to run separate threads for each portion.  The client needed a thread to control the data stream thread to ensure it could start and stop this capability.  On the server end threading the config part interleaves and makes the command line not as user friendly, but this was done to simulate real world scenario since the data stream from the sensor can easily be directed to another sink such as a log file for consumption and it is more likely that the data aggregator is also responsible for configuring the various sensors.
+The project is designed to have separate threads for data sending and for asynchronously mananging the config parameters on both the client and server.  The client needed a thread to control the data stream thread to ensure it could start and stop this capability.  On the server end threading the config part interleaves and makes the command line not as user friendly, but this was done to simulate real world scenario since the data stream from the sensor can easily be directed to another sink such as a log file for consumption and it is more likely that the data aggregator is also responsible for configuring the various sensors.
